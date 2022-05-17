@@ -1,10 +1,13 @@
 import pygame
   
 pygame.init()
+
+FPS = 60
+clock = pygame.time.Clock()
   
 # Create Screen
-x_screen = 500
-y_screen = 500
+x_screen = 1000
+y_screen = 800
 screen = pygame.display.set_mode((x_screen, y_screen))
 screen.fill((255,255,255))
 
@@ -31,3 +34,5 @@ while not exit:
     screen.blit(wordle, wordle.get_rect(center = (x_namegame - 55, 20)))
     screen.blit(vietnam, vietnam.get_rect(center = (x_namegame + 55, 20)))
     pygame.display.update()
+    clock.tick(FPS)
+pygame.quit()
