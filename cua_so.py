@@ -64,8 +64,8 @@ def draw_checking_distance():
 def checking_distance_1(game_location, guess_location, distance=0):
     # calculate distance
     guess = guess_location
-    location_1 = geolocator.geocode(game_location)
-    location_2 = geolocator.geocode(guess)
+    location_1 = geolocator.geocode(guess)
+    location_2 = geolocator.geocode(game_location)
     loc1 = (location_1.latitude, location_1.longitude)
     loc2 = (location_2.latitude, location_2.longitude)
     dis = str(int(geodesic(loc1, loc2).km))
@@ -107,8 +107,8 @@ def checking_distance_1(game_location, guess_location, distance=0):
 
 def checking_distance_2(game_location, guess_location, distance=0):
     guess = guess_location
-    location_1 = geolocator.geocode(game_location)
-    location_2 = geolocator.geocode(guess)
+    location_1 = geolocator.geocode(guess)
+    location_2 = geolocator.geocode(game_location)
     loc1 = (location_1.latitude, location_1.longitude)
     loc2 = (location_2.latitude, location_2.longitude)
     dis = str(int(geodesic(loc1, loc2).km))
@@ -149,8 +149,8 @@ def checking_distance_2(game_location, guess_location, distance=0):
 
 def checking_distance_3(game_location, guess_location, distance=0):
     guess = guess_location
-    location_1 = geolocator.geocode(game_location)
-    location_2 = geolocator.geocode(guess)
+    location_1 = geolocator.geocode(guess)
+    location_2 = geolocator.geocode(game_location)
     loc1 = (location_1.latitude, location_1.longitude)
     loc2 = (location_2.latitude, location_2.longitude)
     dis = str(int(geodesic(loc1, loc2).km))
@@ -191,8 +191,8 @@ def checking_distance_3(game_location, guess_location, distance=0):
 
 def checking_distance_4(game_location, guess_location, distance=0):
     guess = guess_location
-    location_1 = geolocator.geocode(game_location)
-    location_2 = geolocator.geocode(guess)
+    location_1 = geolocator.geocode(guess)
+    location_2 = geolocator.geocode(game_location)
     loc1 = (location_1.latitude, location_1.longitude)
     loc2 = (location_2.latitude, location_2.longitude)
     dis = str(int(geodesic(loc1, loc2).km))
@@ -234,8 +234,8 @@ def checking_distance_4(game_location, guess_location, distance=0):
 
 def checking_distance_5(game_location, guess_location, distance=0):
     guess = guess_location
-    location_1 = geolocator.geocode(game_location)
-    location_2 = geolocator.geocode(guess)
+    location_1 = geolocator.geocode(guess)
+    location_2 = geolocator.geocode(game_location)
     loc1 = (location_1.latitude, location_1.longitude)
     loc2 = (location_2.latitude, location_2.longitude)
     dis = str(int(geodesic(loc1, loc2).km))
