@@ -73,26 +73,46 @@ class province_map():
             self.surface = pygame.image.load(os.path.join(ASSETS_PATH, image))
     def draw_image(self):
         self.image = self.surface
+        pygame.draw.rect(screen, (255, 255, 255), (self.x - 1, self.y - 1, self.width + 2, self.height + 2), width=0)
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
-        pygame.draw.rect(screen, True, (self.x - 1, self.y - 1, self.width + 2, self.height + 2), 2, border_radius = 4)
+        pygame.draw.rect(screen, (0, 0, 0), (self.x - 1, self.y - 1, self.width + 2, self.height + 2), 2, border_radius = 4)
         screen.blit(self.image, (self.x, self.y))
-
+def isOver(x, y, width, height):
+    #Pos is the mouse position or a tuple of (x,y) coordinates
+    pos = pygame.mouse.get_pos()
+    if pos[0] > x and pos[0] < x + width:
+        if pos[1] > y and pos[1] < y + height:
+            return True    
+    return False
+def isClick(x, y, width, height):
+    #print(x, y, width, height)
+    if isOver(x, y, width, height): return True
+    return False
+image_position = [[30, 70], [30, 400], [274, 400]]
+image_size = [[444, 300], [200, 180], [200, 180]]
+hint_list = ["Da_Nang", "Danh_lam_Quang_Nam", "Danh_lam_Quang_Binh"]
+def replaceClickedImage(position, size, hint_list):
+    for i in range(1, 3):
+        if isClick(position[i][0], position[i][1], size[i][0], size[i][1]) == True:
+            a = hint_list[0]
+            hint_list[0] = hint_list[i]
+            hint_list[i] = a
+    return hint_list
 #image_list, x, y, width, height
 def draw(image_list, x, y, width, height):
     images = province_map(image_list, x, y, width, height)
     images.load_image()
     images.draw_image()
-image_position = [[30, 70], [30, 400], [274, 400]]
-image_size = [[444, 300], [200, 180], [200, 180]]
 def show_hint(hints):
     for i in range(len(hints)):
-        draw([hints[i]], image_position[i][0], image_position[i][1], image_size[i][0], image_size[i][1])
+        draw([hints[i] + ".png"], image_position[i][0], image_position[i][1], image_size[i][0], image_size[i][1])
 # running game
 exit = False
-result = "win"
-hint_list = ["Da_Nang.png", "Danh_lam_Quang_Nam.png", "Danh_lam_Quang_Binh.png"]
+result = None
 while not exit:
     for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            hint_list = replaceClickedImage(image_position, image_size, hint_list)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 exit = True
@@ -100,8 +120,8 @@ while not exit:
             exit = True
     screen.blit(wordle, wordle.get_rect(center = (x_namegame - 90, 20)))
     screen.blit(vietnam, vietnam.get_rect(center = (x_namegame + 90, 20)))
-    #draw(["Da_Nang.png"], image_position[0][0], image_position[0][1], 370, 250)
     show_hint(hint_list)
+    pygame.display.update()
     if result == "win":
         winning_rect = button((0,150,0), x_mid - 250, y_mid - 100, 500, 200, 'You win', 100, (255, 255, 0))
         winning_rect.draw(screen)
