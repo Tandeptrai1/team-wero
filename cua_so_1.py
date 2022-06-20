@@ -303,19 +303,26 @@ def get_hint(city_index):
 get_hint(game_location_index)
 
 def replaceClickedImage(position, size, hint_list):
-    for i in range(1, 3):
+    for i in range(0, 3):
         if isClick(position[i][0], position[i][1], size[i][0], size[i][1]) == True:
-            a = hint_list[0]
-            hint_list[0] = hint_list[i]
-            hint_list[i] = a
+            if i == 0:
+                a = hint_list[1]
+                b = hint_list[2]
+                hint_list[2] = hint_list[0]
+                hint_list[0] = a
+                hint_list[1] = b
+            else:
+                a = hint_list[0]
+                hint_list[0] = hint_list[i]
+                hint_list[i] = a
     return hint_list
+def draw(image_list, x, y, width, height, outline = False):
+    image = images(image_list, x, y, width, height, outline)
+    image.load_image()
+    image.draw_image()
 def show_hint(hints):
     for i in range(len(hints)):
-        draw([hints[i] + ".png"], image_position[i][0], image_position[i][1], image_size[i][0], image_size[i][1])
-def draw(image_list, x, y, width, height):
-    images = province_map(image_list, x, y, width, height)
-    images.load_image()
-    images.draw_image()
+        draw([hints[i] + ".png"], image_position[i][0], image_position[i][1], image_size[i][0], image_size[i][1], outline = True)
 def isOver(x, y, width, height):
         #Pos is the mouse position or a tuple of (x,y) coordinates
     pos = pygame.mouse.get_pos()
@@ -350,6 +357,14 @@ instruction_button_list = [instruction_button]
 
 input_box1 = InputBox(x_screen // 2 + 20, 434, 380, 55)
 input_boxes = [input_box1]
+
+# Thay duong dan logo vao day
+#             |
+#             |
+#             V
+draw(["logo/Nen trang.png"], -50, -200, 1000, 1000)
+pygame.display.update()
+time.sleep(4)
 
 while not exit:
     mouse_x, mouse_y = pygame.mouse.get_pos()
